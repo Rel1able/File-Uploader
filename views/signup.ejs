@@ -24,6 +24,9 @@
         </section>
         <button>Sign up</button>
     </form>
+    <% if(locals.errors){%>
+        <%- include("partials/errors.ejs")%>
+    <%}%>
 </body>
 
 </html>
