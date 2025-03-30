@@ -3,9 +3,10 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
 const path = require("node:path");
 const express = require("express");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const passport = require("./config/passportConfig");
+const authRouter = require("./routes/authRouter");
 require("dotenv").config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,8 +31,13 @@ app.use(expressSession({
     )
 }))
 app.use(passport.session());
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
+app.use(authRouter);
 
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => {
+    res.render("index", {
+        user: req.user
+    })
+});
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`))

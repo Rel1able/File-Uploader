@@ -13,3 +13,11 @@ model Session {
   data  String
   expiresAt DateTime
 }
+
+model Users {
+  id  Int @id @default(autoincrement())
+  username  String  @unique
+  password  String
+  
+
+}
