@@ -5,6 +5,7 @@ const path = require("node:path");
 const express = require("express");
 const passport = require("./config/passportConfig");
 const authRouter = require("./routes/authRouter");
+const filesRouter = require("./routes/filesRouter");
 require("dotenv").config();
 
 
@@ -33,6 +34,7 @@ app.use(expressSession({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }))
 app.use(authRouter);
+app.use(filesRouter);
 
 app.get("/", (req, res) => {
     res.render("index", {
