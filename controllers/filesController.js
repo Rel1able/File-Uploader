@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 async function handleUpload(req, res, next) {
     console.log(req.file);
-    await prisma.files.create({
+    await prisma.file.create({
         data: {
             filename: req.file.filename,
             size: (req.file.size/1024),

@@ -23,7 +23,7 @@ const validateSignUpForm = [
         .trim()
         .isLength({ min: 5 }).withMessage("Username must be at least 5 characters long")
         .custom(async (username) => {
-            const user = await prisma.users.findFirst({
+            const user = await prisma.user.findFirst({
                 where: {
                     username: username
                 }
