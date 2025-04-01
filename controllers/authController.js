@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 
-async function renderLoginPage(req, res, next) {
+function renderLoginPage(req, res, next) {
     res.render("login");
 }
 
@@ -14,7 +14,7 @@ const handleLogin = passport.authenticate("local", {
 });
 
 
-async function renderSignUpPage(req, res) {
+function renderSignUpPage(req, res) {
     res.render("signup");
 } 
 
@@ -64,7 +64,7 @@ async function createUser(req, res, next) {
     }
 }
 
-async function handleLogout(req, res, next) {
+function handleLogout(req, res, next) {
     req.logout((err) => {
         if(err) {
             return next(err);
