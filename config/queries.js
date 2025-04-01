@@ -6,7 +6,7 @@ async function createUser(username, password) {
     await prisma.user.create({
             data: {
                 username: username,
-                password: password
+                password: password,
             }
            
         })
@@ -22,11 +22,12 @@ async function getUserByUsername(username) {
     return user
 }
 
-async function createFile(filename, size) {
+async function createFile(filename, size, folderId = null) {
     await prisma.file.create({
         data: {
             filename: filename,
-            size: (size/1024),
+            size: (size / 1024),
+            folderId: folderId
         }
     })
 }
@@ -41,10 +42,39 @@ async function getFolders() {
     return folders;
 }
 
+async function createFolder(foldername) {
+    await prisma.folder.create({
+        data: {
+            foldername: foldername
+        }
+    })
+}
+
+async function getFolderById(folderId) {
+    const folder = await prisma.folder.findUnique({
+        where: {
+            id: parseInt(folderId)
+        }
+    })
+    return folder
+}
+
+async function getFilesByFolder(folderId) {
+    const files = await prisma.file.findMany({
+        where: {
+            folderId: parseInt(folderId)
+        }
+    })
+    return files;
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
     createFile,
     getFiles,
-    getFolders
+    getFolders,
+    createFolder,
+    getFolderById,
+    getFilesByFolder
 }

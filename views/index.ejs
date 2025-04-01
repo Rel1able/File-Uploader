@@ -20,7 +20,7 @@
         <ul>
             <h1>Folders</h1>
             <% folders.forEach((folder) => {%>
-                <li><%= folder.foldername%></li>
+                <li><a href="/folders/<%=folder.id%>"><%= folder.foldername%></a></li>
             <%})%>
         </ul>
     <%}%>
