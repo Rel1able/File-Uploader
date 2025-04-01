@@ -16,5 +16,24 @@
     <a href="/upload-file">Upload File</a>
     <a href="/create-folder">Create folder</a>
     <h1>Hello world</h1>
+    <% if(locals.folders){%>
+        <ul>
+            <h1>Folders</h1>
+            <% folders.forEach((folder) => {%>
+                <li><%= folder.foldername%></li>
+            <%})%>
+        </ul>
+    <%}%>
+    <% if(locals.files){%>
+        <ul>
+            <h1>Files</h1>
+            <% files.forEach((file) => {%>
+                <li>
+                    <%= file.filename%>
+                    <%= file.id%>
+                </li>
+           <%})%>
+        </ul>
+    <%}%>
 </body>
 </html>

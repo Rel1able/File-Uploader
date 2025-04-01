@@ -1,8 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient(); 
+
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
+const db = require("../config/queries");
 
 function renderLoginPage(req, res, next) {
     res.render("login");
@@ -23,11 +23,8 @@ const validateSignUpForm = [
         .trim()
         .isLength({ min: 5 }).withMessage("Username must be at least 5 characters long")
         .custom(async (username) => {
-            const user = await prisma.user.findFirst({
-                where: {
-                    username: username
-                }
-            })
+            const user = await db.getUserByUsername(username)
+            console.log("USER IS ", user)
             if (user) {
                 throw new Error("Username is already taken");
             }
@@ -43,20 +40,15 @@ const validateSignUpForm = [
 
 async function createUser(req, res, next) {
     const errors = validationResult(req);
-    if (errors) {
+    if (!errors.isEmpty()) {
         return res.status(404).render("signup", {
             errors: errors.array()
         })
     }
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        await prisma.users.create({
-            data: {
-                username: req.body.username,
-                password: hashedPassword
-            }
-           
-        })
+        await db.createUser(req.body.username, hashedPassword)
+        
         res.redirect("/");
     } catch (err) {
         console.error(err);

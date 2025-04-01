@@ -1,14 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const db = require("../config/queries")
 
 async function handleUpload(req, res, next) {
     console.log(req.file);
-    await prisma.file.create({
-        data: {
-            filename: req.file.filename,
-            size: (req.file.size/1024),
-        }
-    })
+    await db.createFile(req.file.originalname, req.file.size)
     res.redirect("/");
 }
 

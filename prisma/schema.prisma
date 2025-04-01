@@ -31,6 +31,6 @@ model File {
   filename   String
   size       Int
   uploadTime DateTime @default(now())
-  folder     Folder   @relation(fields: [folderId], references: [id])
-  folderId   Int
+  folder     Folder?   @relation(fields: [folderId], references: [id])
+  folderId   Int?
 }

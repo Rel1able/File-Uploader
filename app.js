@@ -7,6 +7,7 @@ const passport = require("./config/passportConfig");
 const authRouter = require("./routes/authRouter");
 const filesRouter = require("./routes/filesRouter");
 const foldersRouter = require("./routes/foldersRouter");
+const indexRouter = require("./routes/indexRouter");
 require("dotenv").config();
 
 
@@ -34,14 +35,11 @@ app.use(expressSession({
 }))
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }))
+app.use(indexRouter);
 app.use(authRouter);
 app.use(filesRouter);
 app.use(foldersRouter);
 
-app.get("/", (req, res) => {
-    res.render("index", {
-        user: req.user
-    })
-});
+
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`))
