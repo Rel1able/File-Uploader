@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <%= file.filename%>
+    <ul>
+        <li><%= file.size%>kb</li>
+        <li><%= file.uploadTime%></li>
+    </ul>
+    <form action="/file-details/<%=file.id%>" method="POST">
+        <button>Download</button>
+    </form>
+</body>
+</html>
