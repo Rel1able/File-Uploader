@@ -24,8 +24,25 @@ async function renderFolderData(req, res) {
     
 }
 
+async function renderEditFolderForm(req, res) {
+    const folderId = req.params.id;
+    const folder = await db.getFolderById(folderId);
+    console.log("FOLDER", folder)
+    res.render("editFolder",{
+        folder: folder
+    })
+}
+
+async function saveEditedFolder(req, res) {
+    const folderId = req.params.id;
+    await db.updateFolderById(folderId, req.body.foldername);
+    res.redirect("/");
+}
+
 module.exports = {
     renderCreateFolderForm,
     createFolder,
-    renderFolderData
+    renderFolderData,
+    renderEditFolderForm,
+    saveEditedFolder
 }

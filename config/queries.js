@@ -68,6 +68,17 @@ async function getFilesByFolder(folderId) {
     return files;
 }
 
+async function updateFolderById(folderId, newName) {
+    await prisma.folder.update({
+        where: {
+            id: parseInt(folderId)
+        },
+        data: {
+            foldername: newName
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
@@ -76,5 +87,6 @@ module.exports = {
     getFolders,
     createFolder,
     getFolderById,
-    getFilesByFolder
+    getFilesByFolder,
+    updateFolderById
 }

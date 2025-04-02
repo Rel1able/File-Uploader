@@ -7,6 +7,10 @@ foldersRouter.get("/create-folder", foldersController.renderCreateFolderForm)
 foldersRouter.post("/create-folder", foldersController.createFolder)
 
 
+foldersRouter.get("/edit-folder/:id", foldersController.renderEditFolderForm)
+foldersRouter.post("/edit-folder/:id", foldersController.saveEditedFolder)
+
+
 foldersRouter.get("/folders/:id", foldersController.renderFolderData)
 
 foldersRouter.post("/folders/:id/upload-file", filesController.handleUpload);
