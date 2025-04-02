@@ -79,6 +79,14 @@ async function updateFolderById(folderId, newName) {
     })
 }
 
+async function deleteFolder(folderId) {
+    await prisma.folder.delete({
+        where: {
+            id: parseInt(folderId)
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
@@ -88,5 +96,6 @@ module.exports = {
     createFolder,
     getFolderById,
     getFilesByFolder,
-    updateFolderById
+    updateFolderById,
+    deleteFolder
 }

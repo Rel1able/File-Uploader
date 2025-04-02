@@ -23,6 +23,9 @@
                 <li>
                     <a href="/folders/<%=folder.id%>"><%= folder.foldername%></a>
                     <a href="/edit-folder/<%=folder.id%>">Edit</a>
+                    <form action="/delete-folder/<%=folder.id%>" method="POST">
+                        <button onClick="confirm('Are you sure that you want to delete this Folder?')">Delete</button>
+                    </form>
                 </li>
             <%})%>
         </ul>

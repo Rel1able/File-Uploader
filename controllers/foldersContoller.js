@@ -39,10 +39,17 @@ async function saveEditedFolder(req, res) {
     res.redirect("/");
 }
 
+async function deleteFolder(req, res) {
+    const folderId = req.params.id;
+    await db.deleteFolder(folderId);
+    res.redirect("/");
+}
+
 module.exports = {
     renderCreateFolderForm,
     createFolder,
     renderFolderData,
     renderEditFolderForm,
-    saveEditedFolder
+    saveEditedFolder,
+    deleteFolder
 }
