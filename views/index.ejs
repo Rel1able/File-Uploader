@@ -37,6 +37,9 @@
                 <li>
                     <%= file.filename%>
                     <%= file.id%>
+                    <form action="/delete-file/<%=file.id%>" method="POST">
+                        <button>Delete File</button>
+                    </form>
                 </li>
            <%})%>
         </ul>
