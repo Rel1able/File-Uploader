@@ -22,10 +22,11 @@ async function getUserByUsername(username) {
     return user
 }
 
-async function createFile(filename, size, folderId = null) {
+async function createFile(filename, originalFilename, size, folderId = null) {
     await prisma.file.create({
         data: {
             filename: filename,
+            originalFilename: originalFilename,
             size: (size / 1024),
             folderId: folderId
         }

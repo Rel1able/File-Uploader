@@ -35,7 +35,7 @@
             <h1>Files</h1>
             <% files.forEach((file) => {%>
                 <li>
-                    <a href="/file-details/<%=file.id%>"><%= file.filename%></a>
+                    <a href="/file-details/<%=file.id%>"><%= file.originalFilename%></a>
                     <%= file.id%>
                     <form action="/delete-file/<%=file.id%>" method="POST">
                         <button>Delete File</button>
