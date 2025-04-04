@@ -3,9 +3,7 @@ const filesRouter = Router();
 
 const filesController = require("../controllers/filesController");
 const upload = require("../middlewares/storage");
-filesRouter.get("/upload-file", (req, res, next) => {
-    res.render("uploadFileForm");
-})
+filesRouter.get("/upload-file", filesController.renderUploadFileForm)
 
 filesRouter.post("/upload-file", upload.single("file"), filesController.handleUpload )
 

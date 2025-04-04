@@ -40,9 +40,14 @@ async function handleDownload(req, res) {
     res.download(path.join(__dirname, "..", `uploads/${file.filename}`))
 }
 
+async function renderUploadFileForm(req, res) {
+    res.render("uploadFileForm");
+}
+
 module.exports = {
     handleUpload,
     deleteFile,
     renderFileData,
-    handleDownload
+    handleDownload,
+    renderUploadFileForm
 }

@@ -2,7 +2,7 @@ const db = require("../config/queries");
 
 
 function renderCreateFolderForm(req, res) {
-    res.render("createFolder")
+    res.render("createFolderForm")
 }
 
 async function createFolder(req, res) {

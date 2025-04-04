@@ -8,10 +8,10 @@
 </head>
 <body>
     <%- include("header")%>
-    <form action="/edit-folder/<%=folder.id%>" method="POST">
-        <label for="foldername">Enter new folder name:</label>
-        <input type="text" name="foldername" value="<%=folder.foldername%>" id="foldername" />
-        <button type="submit">Save Changes</button>
+    <form class="create-folder-form" action="/create-folder" method="POST">
+        <label for="foldername">Enter the folder name:</label>
+        <input type="text" name="foldername" id="foldername" />
+        <button class="btn" type="submit">Create</button>
     </form>
 </body>
 </html>

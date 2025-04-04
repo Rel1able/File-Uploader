@@ -1,0 +1,16 @@
+<% if(locals.folders){%>
+    <ul class="sidebar">
+        <h1>Folders</h1>
+        <% folders.forEach((folder)=> {%>
+            <li class="folder-card">
+                <a href="/folders/<%=folder.id%>">
+                    <%= folder.foldername%>
+                </a>
+                <a class="btn" href="/edit-folder/<%=folder.id%>">Edit</a>
+                <form action="/delete-folder/<%=folder.id%>" method="POST">
+                    <button class="btn-2" onClick="confirm('Are you sure that you want to delete this Folder?')">Delete</button>
+                </form>
+            </li>
+            <%})%>
+    </ul>
+    <%}%>
