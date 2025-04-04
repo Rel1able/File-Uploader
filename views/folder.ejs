@@ -5,24 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/styles.css" />
-    <script src="/toggleForm.js" defer></script>
+
 </head>
 <body>
-    <%- include("header")%>
-    <button class="upload-btn">Upload File</button>
-    <h1><%=folder.foldername%></h1>
-    <ul>
-        <% files.forEach((file) => {%>
-            <li>
-                <a href="/file-details/<%=file.id%>">
-                <%= file.originalFilename%>
-                </a>
-            </li>
-        <%})%>
-    </ul>
-    <form class="upload-file-form" action="/folders/<%=folder.id%>/upload-file" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Add</button>
-    </form>
+    <%- include("folderHeader")%>
+    <main class="main-container">
+        <%- include("sidebar")%>
+            
+            <div class="container">
+                <h1>
+                    <%=folder.foldername%>
+                </h1>
+                <ul class="main-content">
+                    <% files.forEach((file)=> {%>
+                        <li class="file-card">
+                    
+                            <a href="/file-details/<%=file.id%>">
+                                <img class="icon" src="/file-outline.svg" alt="file icon" />
+                                <%= file.originalFilename%>
+                            </a>
+                    
+                            <form action="/delete-file/<%=file.id%>" method="POST">
+                                <button class="btn-2">Delete File</button>
+                            </form>
+                        </li>
+                        <%})%>
+                </ul>
+                
+            </div>
+            
+    </main>
+    
 </body>
 </html>

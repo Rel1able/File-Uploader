@@ -2,7 +2,7 @@ const path = require("node:path");
 const db = require("../config/queries")
 
 
-async function handleUpload(req, res, next) {
+async function handleUpload(req, res) {
     const folderId = parseInt(req.params.id);
     console.log("Your folderid is ", folderId)
     console.log("Your file data:",req.file);
@@ -26,9 +26,11 @@ async function deleteFile(req, res) {
 async function renderFileData(req, res) {
     const fileId = req.params.id;
     const file = await db.getFileById(fileId);
+    const folders = await db.getFolders();
     console.log("Your file is ", file)
     res.render("file", {
-        file: file
+        file: file,
+        folders: folders
     })
 }
 
@@ -41,7 +43,20 @@ async function handleDownload(req, res) {
 }
 
 async function renderUploadFileForm(req, res) {
-    res.render("uploadFileForm");
+    const folders = await db.getFolders();
+    res.render("uploadFileForm", {
+        folders: folders
+    });
+}
+
+async function renderUploadFileInsideFolderForm(req, res) {
+    const folders = await db.getFolders();
+    const folderId = req.params.id;
+    const folder = await db.getFolderById(folderId);
+    res.render("uploadFileInsideFolderForm", {
+        folder: folder,
+        folders: folders
+    });
 }
 
 module.exports = {
@@ -49,5 +64,6 @@ module.exports = {
     deleteFile,
     renderFileData,
     handleDownload,
-    renderUploadFileForm
+    renderUploadFileForm,
+    renderUploadFileInsideFolderForm
 }

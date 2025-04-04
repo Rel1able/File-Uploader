@@ -1,8 +1,11 @@
 const db = require("../config/queries");
 
 
-function renderCreateFolderForm(req, res) {
-    res.render("createFolderForm")
+async function renderCreateFolderForm(req, res) {
+    const folders = await db.getFolders();
+    res.render("createFolderForm", {
+        folders: folders
+    })
 }
 
 async function createFolder(req, res) {
@@ -15,9 +18,11 @@ async function renderFolderData(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
     const files = await db.getFilesByFolder(folderId);
+    const folders = await db.getFolders();
     res.render("folder", {
         folder: folder,
-        files: files
+        files: files,
+        folders: folders
     })
     console.log("Folder data", folder)
     console.log("Files", files);
@@ -27,9 +32,11 @@ async function renderFolderData(req, res) {
 async function renderEditFolderForm(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
+    const folders = await db.getFolders();
     console.log("FOLDER", folder)
     res.render("editFolder",{
-        folder: folder
+        folder: folder,
+        folders: folders
     })
 }
 

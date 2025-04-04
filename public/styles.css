@@ -18,11 +18,12 @@ ul li{
 
 .upload-file-form, .create-folder-form{
     border: 2px solid;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     padding: 2rem;
-    transform: translate(-50%, -50%);
+
 
 }
 

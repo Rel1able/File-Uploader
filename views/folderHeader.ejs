@@ -1,0 +1,21 @@
+<header>
+    <div class="header-container">
+        <a class="title" href="/">File Uploader</a>
+        <% if(currentUser){%>
+
+
+            <a class="btn-2" href="/log-out">Log-out</a>
+            <%}else{%>
+                <div class="buttons">
+                    <a class="btn" href="/login">Login</a>
+                    <a class="btn" href="/sign-up">Sign up</a>
+                </div>
+
+                <%}%>
+    </div>
+    <% if(currentUser){%>
+        <div class="main-btns">
+            <a class="btn" href="/folders/<%=folder.id%>/upload-file">Upload file</a>
+        </div>
+        <%}%>
+</header>

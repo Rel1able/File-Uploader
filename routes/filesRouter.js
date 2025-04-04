@@ -12,6 +12,7 @@ filesRouter.post("/delete-file/:id", filesController.deleteFile)
 filesRouter.get("/file-details/:id", filesController.renderFileData)
 filesRouter.post("/file-details/:id", filesController.handleDownload)
 
+filesRouter.get("/folders/:id/upload-file", filesController.renderUploadFileInsideFolderForm)
 filesRouter.post("/folders/:id/upload-file", upload.single("file"), filesController.handleUpload)
 
 

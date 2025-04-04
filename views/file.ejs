@@ -8,13 +8,22 @@
 </head>
 <body>
     <%- include("header")%>
-    <%= file.filename%>
-    <ul>
-        <li><%= file.size%>kb</li>
-        <li><%= file.uploadTime%></li>
-    </ul>
-    <form action="/file-details/<%=file.id%>" method="POST">
-        <button class="btn-2">Download</button>
-    </form>
+    
+    <main class="main-container">
+        <%- include("sidebar")%>
+        <%= file.filename%>
+            <ul>
+                <li>
+                    <%= file.size%>kb
+                </li>
+                <li>
+                    <%= file.uploadTime%>
+                </li>
+            </ul>
+            <form action="/file-details/<%=file.id%>" method="POST">
+                <button class="btn-2">Download</button>
+            </form>
+    </main>
+    
 </body>
 </html>
