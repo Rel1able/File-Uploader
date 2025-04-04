@@ -49,7 +49,7 @@ async function createUser(req, res, next) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         await db.createUser(req.body.username, hashedPassword)
         
-        res.redirect("/");
+        res.redirect("/login");
     } catch (err) {
         console.error(err);
         next(err);

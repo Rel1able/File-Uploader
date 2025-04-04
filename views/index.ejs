@@ -8,6 +8,7 @@
     <script src="toggleForm.js" defer></script>
 </head>
 <body>
+    <%- include("header")%>
     <% if(locals.user){%>
         <h1>You are logged in</h1>
         <h2><%=user.username%></h2>
