@@ -3,6 +3,7 @@ const authRouter = Router();
 const authController = require("../controllers/authController");
 
 
+
 authRouter.get("/sign-up",authController.renderSignUpPage)
 authRouter.post("/sign-up",authController.validateSignUpForm, authController.createUser)
 
