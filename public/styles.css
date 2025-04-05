@@ -120,3 +120,11 @@ a{
     gap: 1rem;
 }
 
+.auth-err{
+    margin: auto;
+}
+
+.auth-err a{
+    color: var(--main-color);
+}
+
