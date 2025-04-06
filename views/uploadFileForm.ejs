@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload File</title>
     <link rel="stylesheet" href="/styles.css"/>
+    <script src="/customFileInput.js"defer></script>
 </head>
 <body>
     <%- include("header")%>
     <main class="main-container">
         <%- include("sidebar")%>
-            <form class="upload-file-form" action="/upload-file" method="POST" enctype="multipart/form-data">
-                <input type="file" name="file" required>
+            <form class="form" action="/upload-file" method="POST" enctype="multipart/form-data">
+                <div class="file-input">
+                    <input id="file" type="file" name="file" class="file" required>
+                    <label for="file">Select File</label>
+                    <p class="file-name"></p>
+                </div>
                 <button class="btn" type="submit">Add</button>
             </form>
     </main>

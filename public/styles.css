@@ -16,26 +16,12 @@ ul li{
 }
 
 
-.upload-file-form, .create-folder-form{
-    border: 2px solid;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 2rem;
-
-
-}
-
-.visible{
-    display: block;
-}
-
 .header-container{
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 a{
@@ -128,3 +114,44 @@ a{
     color: var(--main-color);
 }
 
+.form{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: 2px solid gray;
+    border-radius: 2rem;
+    gap: 3rem;
+}
+
+.file{
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+.file-input label{
+    display: block;
+    position: relative;
+    width: 200px;
+    height: 50px;
+    border: 2px solid var(--main-color);
+    border-radius: 25px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.file-name{
+   position: relative;
+   bottom: -35px;
+   left: 10px;
+   font-size: 0.85rem;
+   color: black; 
+}
