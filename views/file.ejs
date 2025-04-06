@@ -17,10 +17,11 @@
                     <%= file.originalFilename%>
                 </li>
                 <li>
-                    <%= file.size%>kb
+                    <%= file.size%> KB
                 </li>
                 <li>
-                    <%= file.uploadTime%>
+                    Uploaded on
+                    <%= date%>
                 </li>
                 <form action="/file-details/<%=file.id%>" method="POST">
                     <button class="btn-2">Download</button>

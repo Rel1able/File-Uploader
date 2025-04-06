@@ -105,6 +105,15 @@ async function getFileById(fileId) {
     return file;
 }
 
+async function getFilesWithoutFolder() {
+    const files = await prisma.file.findMany({
+        where: {
+            folderId: null
+        }
+    })
+    return files
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
@@ -117,5 +126,6 @@ module.exports = {
     updateFolderById,
     deleteFolder,
     deleteFile,
-    getFileById
+    getFileById,
+    getFilesWithoutFolder
 }

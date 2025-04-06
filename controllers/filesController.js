@@ -1,5 +1,6 @@
 const path = require("node:path");
 const db = require("../config/queries")
+const formatDate = require("../utils/formatDate");
 
 
 async function handleUpload(req, res) {
@@ -27,10 +28,11 @@ async function renderFileData(req, res) {
     const fileId = req.params.id;
     const file = await db.getFileById(fileId);
     const folders = await db.getFolders();
-    console.log("Your file is ", file)
+    const date = formatDate(file.uploadTime);
     res.render("file", {
         file: file,
-        folders: folders
+        folders: folders,
+        date: date
     })
 }
 
