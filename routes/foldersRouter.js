@@ -5,7 +5,7 @@ const foldersRouter = Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
 foldersRouter.get("/create-folder",authMiddleware, foldersController.renderCreateFolderForm)
-foldersRouter.post("/create-folder", foldersController.createFolder)
+foldersRouter.post("/create-folder",foldersController.validateCreateFolderForm, foldersController.createFolder)
 
 
 foldersRouter.get("/edit-folder/:id",authMiddleware, foldersController.renderEditFolderForm)

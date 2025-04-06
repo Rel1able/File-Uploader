@@ -24,7 +24,6 @@ const validateSignUpForm = [
         .isLength({ min: 5 }).withMessage("Username must be at least 5 characters long")
         .custom(async (username) => {
             const user = await db.getUserByUsername(username)
-            console.log("USER IS ", user)
             if (user) {
                 throw new Error("Username is already taken");
             }

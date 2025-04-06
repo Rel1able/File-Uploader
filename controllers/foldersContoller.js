@@ -1,4 +1,5 @@
 const db = require("../config/queries");
+const { body, validationResult } = require("express-validator");
 
 
 async function renderCreateFolderForm(req, res) {
@@ -8,9 +9,25 @@ async function renderCreateFolderForm(req, res) {
     })
 }
 
+const validateCreateFolderForm = [
+    body("foldername")
+        .trim()
+        .isLength({min: 5}).withMessage("Folder name must be at least 5 characters long")
+]
+
 async function createFolder(req, res) {
-    await db.createFolder(req.body.foldername);
-    res.redirect("/");
+    const folders = await db.getFolders();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).render("createFolderForm", {
+            folders: folders,
+            errors: errors.array(),
+        })
+    } else {
+            await db.createFolder(req.body.foldername);
+            res.redirect("/");
+    }
+
     
 }
 
@@ -58,5 +75,6 @@ module.exports = {
     renderFolderData,
     renderEditFolderForm,
     saveEditedFolder,
-    deleteFolder
+    deleteFolder,
+    validateCreateFolderForm
 }

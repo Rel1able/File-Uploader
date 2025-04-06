@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create folder</title>
     <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -14,7 +14,9 @@
                 <label for="foldername">Enter the folder name:</label>
                 <input type="text" name="foldername" id="foldername" />
                 <button class="btn" type="submit">Create</button>
+                <%- include("partials/errors.ejs")%>
             </form>
+            
     </main>
     
 </body>
