@@ -121,7 +121,9 @@ a{
     margin: auto;
     border: 2px solid gray;
     border-radius: 2rem;
-    gap: 3rem;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .file{
@@ -133,6 +135,7 @@ a{
 
 .file-input label{
     display: block;
+    margin: auto;
     position: relative;
     width: 200px;
     height: 50px;
@@ -150,8 +153,25 @@ a{
 
 .file-name{
    position: relative;
-   bottom: -35px;
+   
    left: 10px;
    font-size: 0.85rem;
    color: black; 
 }
+
+.form-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input{
+    border: 2px solid rgb(142, 141, 141);
+    border-radius: 2rem;
+    padding: 0.5rem;
+}
+
+input:focus{
+    outline: none;
+}
+

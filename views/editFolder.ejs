@@ -10,7 +10,7 @@
     <%- include("header")%>
     <main class="main-container">
         <%- include("sidebar")%>
-            <form action="/edit-folder/<%=folder.id%>" method="POST">
+            <form class="form" action="/edit-folder/<%=folder.id%>" method="POST">
                 <label for="foldername">Enter new folder name:</label>
                 <input type="text" name="foldername" value="<%=folder.foldername%>" id="foldername" />
                 <button class="btn" type="submit">Save Changes</button>

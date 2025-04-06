@@ -9,13 +9,13 @@
 <body>
     <a href="/">Home</a>
     <%- include("header")%>
-    <form action="/login" method="POST">
+    <form class="form" action="/login" method="POST">
         <h1>Please log in</h1>
-        <section>
+        <section class="form-section">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" required/>
         </section>
-        <section>
+        <section class="form-section">
             <label for="password">Password</label>
             <input id="password" name="password" type="password" required/>
         </section>

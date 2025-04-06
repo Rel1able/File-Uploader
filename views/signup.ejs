@@ -10,17 +10,17 @@
 
 <body>
     <%- include("header")%>
-    <form action="/sign-up" method="POST">
+    <form class="form" action="/sign-up" method="POST">
         <h1>Sign up</h1>
-        <section>
+        <section class="form-section">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" required />
         </section>
-        <section>
+        <section class="form-section">
             <label for="password">Password</label>
             <input id="password" name="password" type="password" required />
         </section>
-        <section>
+        <section class="form-section">
             <label for="confPassword">Confirm Password</label>
             <input id="confPassword" name="confPassword" type="password" required />
         </section>
