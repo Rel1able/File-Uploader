@@ -61,13 +61,18 @@ a{
     background-color: var(--main-color);
 }
 
+
+.uploadFile-btn{
+    width: 8rem;
+}
+
 .folder-card{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border: 2px solid rgb(191, 191, 191);
     padding: 2rem;
     width: 100%;
-    gap: 2rem;
+
     border-radius: 2rem;
     
 
@@ -85,7 +90,7 @@ a{
 }
 
 .sidebar{
-    min-width: 8rem;
+    min-width: 10rem;
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -233,11 +238,16 @@ input:focus{
 
 
 
-@media (max-width: 480px){
+@media (max-width: 768px){
     .main-container{
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
     }
+    .sidebar{
+        width: 100%;
+        font-size: 0.7rem;
+    }
+
 }
