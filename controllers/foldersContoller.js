@@ -12,7 +12,7 @@ async function renderCreateFolderForm(req, res) {
 const validateCreateFolderForm = [
     body("foldername")
         .trim()
-        .isLength({min: 5}).withMessage("Folder name must be at least 5 characters long")
+        .isLength({min: 5, max: 12}).withMessage("Folder name must be between 5 and 12 characters long")
 ]
 
 async function createFolder(req, res) {
