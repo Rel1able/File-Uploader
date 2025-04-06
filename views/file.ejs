@@ -11,18 +11,22 @@
     
     <main class="main-container">
         <%- include("sidebar")%>
-        <%= file.filename%>
-            <ul>
+        
+            <ul class="file-details">
+                <li class="file-details-name">
+                    <%= file.originalFilename%>
+                </li>
                 <li>
                     <%= file.size%>kb
                 </li>
                 <li>
                     <%= file.uploadTime%>
                 </li>
+                <form action="/file-details/<%=file.id%>" method="POST">
+                    <button class="btn-2">Download</button>
+                </form>
             </ul>
-            <form action="/file-details/<%=file.id%>" method="POST">
-                <button class="btn-2">Download</button>
-            </form>
+            
     </main>
     
 </body>

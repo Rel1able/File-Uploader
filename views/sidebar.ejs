@@ -1,9 +1,9 @@
 <% if(locals.folders){%>
     <ul class="sidebar">
-        <h1>Folders</h1>
+        <h1 class="folders-title"><a href="/">Folders</a></h1>
         <% folders.forEach((folder)=> {%>
             <li class="folder-card">
-                <a href="/folders/<%=folder.id%>">
+                <a class="folder-name" href="/folders/<%=folder.id%>">
                     <%= folder.foldername%>
                 </a>
                 <a class="btn" href="/edit-folder/<%=folder.id%>">Edit</a>
