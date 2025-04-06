@@ -59,8 +59,20 @@ async function renderEditFolderForm(req, res) {
 
 async function saveEditedFolder(req, res) {
     const folderId = req.params.id;
-    await db.updateFolderById(folderId, req.body.foldername);
-    res.redirect("/");
+    const folder = await db.getFolderById(folderId);
+    const folders = await db.getFolders();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(404).render("editFolder",{
+            folder: folder,
+            folders: folders,
+            errors: errors.array(),
+        })
+    } else {
+        await db.updateFolderById(folderId, req.body.foldername);
+        res.redirect("/");
+    }
+    
 }
 
 async function deleteFolder(req, res) {

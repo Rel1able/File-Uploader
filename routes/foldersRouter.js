@@ -9,7 +9,7 @@ foldersRouter.post("/create-folder",foldersController.validateCreateFolderForm, 
 
 
 foldersRouter.get("/edit-folder/:id",authMiddleware, foldersController.renderEditFolderForm)
-foldersRouter.post("/edit-folder/:id", foldersController.saveEditedFolder)
+foldersRouter.post("/edit-folder/:id",foldersController.validateCreateFolderForm, foldersController.saveEditedFolder)
 
 foldersRouter.post("/delete-folder/:id", foldersController.deleteFolder)
 foldersRouter.get("/folders/:id", foldersController.renderFolderData)
