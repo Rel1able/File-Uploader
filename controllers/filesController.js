@@ -7,6 +7,7 @@ const supabase = require("../config/supabase");
 
 async function handleUpload(req, res) {
     const folderId = parseInt(req.params.id);
+    const userId = req.user.id;
 
     const filePath = `${req.file.originalname}`
     const { data, error } = await supabase.storage.from("uploads").upload(filePath, req.file.buffer, {
@@ -15,10 +16,10 @@ async function handleUpload(req, res) {
 
 
     if (folderId) {
-        await db.createFile(req.file.originalname, data.fullPath, req.file.size, folderId);
+        await db.createFile(req.file.originalname, data.fullPath, req.file.size, folderId, userId);
         res.redirect(`/folders/${folderId}`);
     } else {
-        await db.createFile(req.file.originalname, data.fullPath, req.file.size);
+        await db.createFile(req.file.originalname, data.fullPath, req.file.size, null, userId);
         res.redirect("/");
     }
 }
@@ -32,7 +33,11 @@ async function deleteFile(req, res) {
 async function renderFileData(req, res) {
     const fileId = req.params.id;
     const file = await db.getFileById(fileId);
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
+   
     const date = formatDate(file.uploadTime);
     res.render("file", {
         file: file,
@@ -59,14 +64,20 @@ async function handleDownload(req, res) {
 }
 
 async function renderUploadFileForm(req, res) {
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     res.render("uploadFileForm", {
         folders: folders
     });
 }
 
 async function renderUploadFileInsideFolderForm(req, res) {
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
     res.render("uploadFileInsideFolderForm", {

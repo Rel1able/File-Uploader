@@ -3,7 +3,10 @@ const { body, validationResult } = require("express-validator");
 
 
 async function renderCreateFolderForm(req, res) {
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     res.render("createFolderForm", {
         folders: folders
     })
@@ -16,7 +19,10 @@ const validateCreateFolderForm = [
 ]
 
 async function createFolder(req, res) {
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).render("createFolderForm", {
@@ -24,7 +30,7 @@ async function createFolder(req, res) {
             errors: errors.array(),
         })
     } else {
-            await db.createFolder(req.body.foldername);
+            await db.createFolder(req.body.foldername, req.user.id);
             res.redirect("/");
     }
 
@@ -35,7 +41,10 @@ async function renderFolderData(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
     const files = await db.getFilesByFolder(folderId);
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     res.render("folder", {
         folder: folder,
         files: files,
@@ -47,7 +56,10 @@ async function renderFolderData(req, res) {
 async function renderEditFolderForm(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     res.render("editFolder",{
         folder: folder,
         folders: folders
@@ -57,7 +69,10 @@ async function renderEditFolderForm(req, res) {
 async function saveEditedFolder(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
-    const folders = await db.getFolders();
+    let folders = [];
+    if (req.user) {
+        folders = await db.getFolders(req.user.id);
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(404).render("editFolder",{

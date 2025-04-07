@@ -238,6 +238,11 @@ input:focus{
 }
 
 
+.sign-up{
+    font-weight: bold;
+    color: var(--main-color);
+}
+
 
 @media (max-width: 768px){
     .main-container{

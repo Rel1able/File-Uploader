@@ -22,31 +22,41 @@ async function getUserByUsername(username) {
     return user
 }
 
-async function createFile(filename, fileUrl, size, folderId = null) {
+async function createFile(filename, fileUrl, size, folderId = null, userId) {
     await prisma.file.create({
         data: {
             filename: filename,
             fileUrl: fileUrl,
             size: (size / 1024),
-            folderId: folderId
+            folderId: folderId,
+            userId: userId
         }
     })
 }
 
-async function getFiles() {
-    const files = await prisma.file.findMany();
+async function getFiles(userId) {
+    const files = await prisma.file.findMany({
+        where: {
+            userId: userId
+        }
+    });
     return files;
 }
 
-async function getFolders() {
-    const folders = await prisma.folder.findMany();
+async function getFolders(userId) {
+    const folders = await prisma.folder.findMany({
+        where: {
+            userId: userId
+        }
+    });
     return folders;
 }
 
-async function createFolder(foldername) {
+async function createFolder(foldername, userId) {
     await prisma.folder.create({
         data: {
-            foldername: foldername
+            foldername: foldername,
+            userId: userId
         }
     })
 }
@@ -105,10 +115,11 @@ async function getFileById(fileId) {
     return file;
 }
 
-async function getFilesWithoutFolder() {
+async function getFilesWithoutFolder(userId) {
     const files = await prisma.file.findMany({
         where: {
-            folderId: null
+            folderId: null,
+            userId: parseInt(userId)
         }
     })
     return files
