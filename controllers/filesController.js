@@ -7,15 +7,12 @@ const supabase = require("../config/supabase");
 
 async function handleUpload(req, res) {
     const folderId = parseInt(req.params.id);
-    console.log("Your folderid is ", folderId)
-    console.log("Your file data:",req.file);
 
     const filePath = `${req.file.originalname}`
     const { data, error } = await supabase.storage.from("uploads").upload(filePath, req.file.buffer, {
         upsert: true
     })
-    console.log("result is", data)
-    console.log("erorr", error)
+
 
     if (folderId) {
         await db.createFile(req.file.originalname, data.fullPath, req.file.size, folderId);
@@ -47,7 +44,6 @@ async function renderFileData(req, res) {
 async function handleDownload(req, res) {
     const fileId = req.params.id;
     const file = await db.getFileById(fileId);
-    console.log("Your file is ", file)
     let path = file.fileUrl;
     path = path.slice("uploads/".length);
     const { data, error } = await supabase.storage.from("uploads").download(path);

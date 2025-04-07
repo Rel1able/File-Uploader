@@ -114,6 +114,14 @@ async function getFilesWithoutFolder() {
     return files
 }
 
+async function deleteFilesInsideFolder(folderId) {
+    await prisma.file.deleteMany({
+        where: {
+            folderId: parseInt(folderId)
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
@@ -127,5 +135,6 @@ module.exports = {
     deleteFolder,
     deleteFile,
     getFileById,
-    getFilesWithoutFolder
+    getFilesWithoutFolder,
+    deleteFilesInsideFolder
 }

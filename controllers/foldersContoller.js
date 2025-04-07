@@ -41,8 +41,6 @@ async function renderFolderData(req, res) {
         files: files,
         folders: folders
     })
-    console.log("Folder data", folder)
-    console.log("Files", files);
     
 }
 
@@ -50,7 +48,6 @@ async function renderEditFolderForm(req, res) {
     const folderId = req.params.id;
     const folder = await db.getFolderById(folderId);
     const folders = await db.getFolders();
-    console.log("FOLDER", folder)
     res.render("editFolder",{
         folder: folder,
         folders: folders
@@ -77,7 +74,9 @@ async function saveEditedFolder(req, res) {
 
 async function deleteFolder(req, res) {
     const folderId = req.params.id;
+    await db.deleteFilesInsideFolder(folderId);
     await db.deleteFolder(folderId);
+    
     res.redirect("/");
 }
 
