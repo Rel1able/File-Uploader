@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node --watch app.js",
-    "build": "prisma generate"
+    "build": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
