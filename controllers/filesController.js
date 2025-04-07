@@ -1,19 +1,27 @@
 const path = require("node:path");
 const db = require("../config/queries")
 const formatDate = require("../utils/formatDate");
+const supabase = require("../config/supabase");
+
 
 
 async function handleUpload(req, res) {
     const folderId = parseInt(req.params.id);
     console.log("Your folderid is ", folderId)
     console.log("Your file data:",req.file);
-    const originalName = Buffer.from(req.file.originalname, "latin1").toString("utf8");
+
+    const filePath = `${req.file.originalname}`
+    const { data, error } = await supabase.storage.from("uploads").upload(filePath, req.file.buffer, {
+        upsert: true
+    })
+    console.log("result is", data)
+    console.log("erorr", error)
 
     if (folderId) {
-        await db.createFile(req.file.filename, originalName, req.file.size, folderId);
+        await db.createFile(req.file.originalname, data.fullPath, req.file.size, folderId);
         res.redirect(`/folders/${folderId}`);
     } else {
-        await db.createFile(req.file.filename, originalName, req.file.size);
+        await db.createFile(req.file.originalname, data.fullPath, req.file.size);
         res.redirect("/");
     }
 }
@@ -40,8 +48,18 @@ async function handleDownload(req, res) {
     const fileId = req.params.id;
     const file = await db.getFileById(fileId);
     console.log("Your file is ", file)
+    let path = file.fileUrl;
+    path = path.slice("uploads/".length);
+    const { data, error } = await supabase.storage.from("uploads").download(path);
 
-    res.download(path.join(__dirname, "..", `uploads/${file.filename}`))
+    if (error) {
+        throw error;
+    }
+
+    const buffer = Buffer.from(await data.arrayBuffer());
+    res.attachment(path);
+    res.send(buffer);
+
 }
 
 async function renderUploadFileForm(req, res) {

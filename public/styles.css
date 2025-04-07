@@ -72,7 +72,7 @@ a{
     border: 2px solid rgb(191, 191, 191);
     padding: 2rem;
     width: 100%;
-
+    gap: 1rem;
     border-radius: 2rem;
     
 
@@ -80,6 +80,7 @@ a{
 
 .main-container{
     display: flex;
+    height: 100%;
 }
 
 .container{
@@ -246,7 +247,7 @@ input:focus{
         width: 100%;
     }
     .sidebar{
-        width: 100%;
+        
         font-size: 0.7rem;
     }
 
